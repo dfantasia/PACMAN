@@ -64,7 +64,7 @@ handles.label2=NaN;
 handles.label3=NaN;
 handles.label4=NaN;
 handles.FileName='';
-handles.PathName=[pwd,'\dataset'];
+handles.PathName=['C:\Users\michael\Desktop\Interscalene_Dataset'];
 
 % do not dispaly axis lines and backgrounds 
 %axes(handles.axis_image);
@@ -155,9 +155,12 @@ function open_Callback(hObject, eventdata, handles)
        return 
     end
     
+    % update frame number
+    handles.framenum=1;
+    
     % display the first image 
     axes(handles.axis_image);
-    I1=handles.Images(:,:,1);
+    I1=handles.Images(:,:,handles.framenum);
     imshow(I1);
     
     % get images dimension
@@ -165,15 +168,12 @@ function open_Callback(hObject, eventdata, handles)
  
     % set max of slider
     set(handles.slider1,'max',z);
+    set(handles.slider1,'Value',1);
 
     % update static text box
-    pos=1;
-    set(handles.text_fnm, 'String',[num2str(pos),'/',num2str(size(handles.Images,3))]);
-    axes(handles.axis_image);
-    
-    % update frame number
-    handles.framenum=pos;
-    
+    set(handles.text_fnm, 'String',[num2str(handles.framenum),'/',num2str(size(handles.Images,3))]);
+      
+      
     % in the begining all labels are set to zero 
     handles.label1=zeros(size(handles.Images));
     handles.label2=zeros(size(handles.Images));
