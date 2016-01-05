@@ -1,0 +1,28 @@
+clc
+clear all
+close all
+%%
+
+%images file location pointer
+%filename = 'C:\Users\u20386\Videos\Subjects\Subject_1';
+
+bmpFiles = dir('*.bmp'); %Currently need to navigate to directory of .bmp files and run in "Run Section" 
+numFiles = length(bmpFiles); %Determine for loop limit
+imageFiles = cell(1, numFiles);
+
+%FOR loop: Check for image,read,crop,save new image into matrix and .MAT
+%file
+for k = 1:numFiles
+  if bmpFiles(k).bytes == 0 %Check that .bmp file has image
+  else
+  imageFiles{k} = imread(bmpFiles(k).name);
+  dim = imageFiles {k}(:,:,1);
+  crop = imcrop(dim, [130 0 1039 768]);
+  %imshow(crop);
+  I(:,:,k) = crop; %Cropped image storage matrix
+  
+  end %end IF 
+end %end FOR
+
+
+save ('sub1.mat','I');
